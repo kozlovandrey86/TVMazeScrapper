@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace TVMazeScrapper
+namespace DAL
 {
     public class Cast
     {
@@ -11,4 +9,3 @@ namespace TVMazeScrapper
         public DateTime Birthday { get; set; }
     }
 }
-
