@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="tvmazecast.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

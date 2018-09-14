@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Scrapper\Scrapper.csproj" />
   </ItemGroup>
 
 </Project>

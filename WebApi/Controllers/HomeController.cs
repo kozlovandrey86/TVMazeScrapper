@@ -11,6 +11,10 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class HomeController : Controller
     {
+        [HttpGet("/index")]
+        public string Index(){
+            return "Home Page";
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<Show> Get()
@@ -19,12 +23,6 @@ namespace WebApi.Controllers
 
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
         
     }
 }
