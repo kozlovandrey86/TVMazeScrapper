@@ -10,10 +10,10 @@ using Scrapper;
 namespace WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Admin")]
+    [Route("DB")]
     public class DBController : Controller
     {
-        [HttpGet]
+        [HttpGet("Init")]
         public async Task Init(){
             await Repository.Create();
             List<Show> shows = await TvMazeScrapper.Scrap();

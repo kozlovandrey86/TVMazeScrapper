@@ -4,25 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAL;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("Home")]
     public class HomeController : Controller
     {
-        [HttpGet("/index")]
+        [HttpGet("Index")]
         public string Index(){
             return "Home Page";
         }
         // GET api/values
-        [HttpGet]
-        public IEnumerable<Show> Get()
+        [HttpGet("Get")]
+        public string Get()
         {
-            return Repository.GetShows();
-
+            var shows = Repository.GetShows();
+            if (shows != null && shows.Count()>0)
+                return JsonConvert.SerializeObject(shows);
+            return  "Init database via AdminController";
         }
-
         
     }
 }
