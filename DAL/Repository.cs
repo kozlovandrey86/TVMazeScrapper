@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class Repository
+    public class Repository: IRepository
     {
-        public static async Task Create(){
+        public  async Task Create(){
             using (var db = new  TVMazeScrapperContext()){
                 await db.Database.EnsureCreatedAsync();
             }
         }    
 
-        public static async Task Save(IEnumerable<Show> shows)
+        public  async Task Save(IEnumerable<Show> shows)
         {
             using (var db = new TVMazeScrapperContext())
             {
@@ -28,13 +28,14 @@ namespace DAL
             }
         }
 
-        public static IEnumerable<Show> GetShows(){
-            using (var db = new TVMazeScrapperContext()){
+        public  IEnumerable<Show> GetShows(){
+            //using (var db = new TVMazeScrapperContext()){
+            var db = new TVMazeScrapperContext();
                 return db.Shows;
-            }
+            //}
         }
 
-        public static async Task Drop(){
+        public  async Task Drop(){
             using (var db=new TVMazeScrapperContext()){
                 await db.Database.EnsureDeletedAsync();
             }

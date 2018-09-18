@@ -9,17 +9,22 @@ using System.Threading.Tasks;
 
 namespace Scrapper
 {
-    public class TvMazeScrapper
+    public class TvMazeScrapper: ITvMazeScrapper
     {
-        public static async Task<List<Show>> Scrap()
+        private readonly ITVMazeProvider _mazeProvider;
+        public TvMazeScrapper(ITVMazeProvider mazeProvider)
+        {
+            _mazeProvider = mazeProvider;
+        }
+        public async Task<List<Show>> Scrap()
         {
             //HttpClient client = new HttpClient();
             //string str = await client.GetStringAsync("http://api.tvmaze.com/shows/");
             List<Show> shows = null;
             try
             {
-                shows = await TVMazeProvider.GetShows();
-                await TVMazeProvider.FillShows(shows);
+                shows = await _mazeProvider.GetShows();
+                await _mazeProvider.FillShows(shows);
             }
             catch(Exception ex){
                 //TODO:logging

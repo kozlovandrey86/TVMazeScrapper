@@ -13,16 +13,34 @@ namespace WebApi.Controllers
     [Route("DB")]
     public class DBController : Controller
     {
+        private readonly ITvMazeScrapper _mazeScrapper;
+        private readonly IRepository _repository;
+
+        public DBController(ITvMazeScrapper mazeScrapper, IRepository repository)
+        {
+            _mazeScrapper = mazeScrapper;
+            _repository = repository;
+        }
         [HttpGet("Init")]
         public async Task Init(){
-            await Repository.Create();
-            List<Show> shows = await TvMazeScrapper.Scrap();
-            await Repository.Save(shows);
+            await _repository.Create();
+            List<Show> shows = await _mazeScrapper.Scrap();
+            await _repository.Save(shows);
         }
 
-        [HttpGet]
+        [HttpGet("Refresh")]
+        public async Task Refresh()
+        {
+            await _repository.Drop();
+            await _repository.Create();
+            List<Show> shows = await _mazeScrapper.Scrap();
+            await _repository.Save(shows);
+        }
+
+
+        [HttpGet("Drop")]
         public async Task Drop(){
-            await Repository.Drop();
+            await _repository.Drop();
         }
     }
 }

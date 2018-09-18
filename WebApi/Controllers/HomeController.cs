@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DAL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Scrapper;
 
 namespace WebApi.Controllers
 {
@@ -12,6 +13,11 @@ namespace WebApi.Controllers
     [Route("Home")]
     public class HomeController : Controller
     {
+        private readonly IRepository _repository;
+        public HomeController(IRepository repository)
+        {
+            _repository = repository;
+        }
         [HttpGet("Index")]
         public string Index(){
             return "Home Page";
@@ -20,7 +26,7 @@ namespace WebApi.Controllers
         [HttpGet("Get")]
         public string Get()
         {
-            var shows = Repository.GetShows();
+            var shows = _repository.GetShows();
             if (shows != null && shows.Count()>0)
                 return JsonConvert.SerializeObject(shows);
             return  "Init database via AdminController";
