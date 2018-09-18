@@ -33,13 +33,13 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("Shows/{page}")]
-        public string Shows(int page=1){
-            var shows = _repository.GetShows(page: page);
+        public async Task<string> Shows(int page=1){
+            var shows = await _repository.GetShows(page: page);
             if (shows != null && shows.Count() > 0)
             {
-                var showsOrderByDescBirthday = from s in shows
-                          select new { id = s.Id, cast = s.Casts.OrderByDescending(c => c.Birthday) };
-                return JsonConvert.SerializeObject(showsOrderByDescBirthday);
+                //var showsOrderByDescBirthday = from s in shows
+                //          select new { id = s.Id, cast = s.Casts.OrderByDescending(c => c.Birthday) };
+                return JsonConvert.SerializeObject(shows);
             }
             return "Init database via AdminController";
         }

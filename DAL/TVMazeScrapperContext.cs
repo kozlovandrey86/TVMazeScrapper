@@ -12,7 +12,10 @@ namespace DAL
 
         public TVMazeScrapperContext(DbContextOptions<TVMazeScrapperContext> options): base(options)
         {
-            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Show>().HasMany(e => e.Casts).WithOne().HasForeignKey(e=>e.ShowId);
         }
     }
 }

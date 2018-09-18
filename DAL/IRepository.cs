@@ -12,7 +12,7 @@ namespace DAL
         Task Save(IEnumerable<Show> shows);
 
         IEnumerable<Show> GetAllShows();
-        IEnumerable<Show> GetShows(int page = 1);
+        Task<IEnumerable<Show>> GetShows(int page = 1);
 
         Task Drop();
         
