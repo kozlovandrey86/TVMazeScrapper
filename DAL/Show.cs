@@ -6,7 +6,6 @@ namespace DAL
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public List<Cast> Casts { get; set; }
     }
 }

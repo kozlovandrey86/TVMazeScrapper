@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using Scrapper;
 
 namespace WebApi
@@ -29,6 +29,7 @@ namespace WebApi
             services.AddScoped<ITVMazeProvider, TVMazeProvider>();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<ITvMazeScrapper, TvMazeScrapper>();
+            services.AddDbContextPool<TVMazeScrapperContext>(options=>options.UseSqlite("Data Source=tvmazescrapper.db"), poolSize: 10);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -23,14 +23,25 @@ namespace WebApi.Controllers
             return "Home Page";
         }
         // GET api/values
-        [HttpGet("Get")]
-        public string Get()
+        [HttpGet("AllShows")]
+        public string AllShows()
         {
-            var shows = _repository.GetShows();
+            var shows = _repository.GetAllShows();
             if (shows != null && shows.Count()>0)
                 return JsonConvert.SerializeObject(shows);
             return  "Init database via AdminController";
         }
-        
+
+        [HttpGet("Shows/{page}")]
+        public string Shows(int page=1){
+            var shows = _repository.GetShows(page: page);
+            if (shows != null && shows.Count() > 0)
+            {
+                var showsOrderByDescBirthday = from s in shows
+                          select new { id = s.Id, cast = s.Casts.OrderByDescending(c => c.Birthday) };
+                return JsonConvert.SerializeObject(showsOrderByDescBirthday);
+            }
+            return "Init database via AdminController";
+        }
     }
 }
