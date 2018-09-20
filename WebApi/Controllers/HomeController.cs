@@ -37,8 +37,6 @@ namespace WebApi.Controllers
             var shows = await _repository.GetShows(page: page);
             if (shows != null && shows.Count() > 0)
             {
-                //var showsOrderByDescBirthday = from s in shows
-                //          select new { id = s.Id, cast = s.Casts.OrderByDescending(c => c.Birthday) };
                 return JsonConvert.SerializeObject(shows);
             }
             return "Init database via AdminController";

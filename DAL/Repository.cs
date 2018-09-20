@@ -42,13 +42,11 @@ namespace DAL
                 return GetAllShows();
             var shows = _context.Shows
                                .Skip(pageSize * page)
-                               .Take(pageSize);
-            await shows.ForEachAsync(s => _context.Entry(s).Collection(c => c.Casts.OrderByDescending(b => b.Birthday)));
-            _context.Entry(shows).Collection(s=>s. cast)
-            // .Include(s=>s.Casts.OrderByDescending());
+                               .Take(pageSize)
+                               .Include(s => s.Casts);
+            await shows.ForEachAsync(s => s.Casts = s.Casts.OrderByDescending(b => b.Birthday).ToList());
+
             return shows;
-
-
         }
         
         public  async Task Drop(){
