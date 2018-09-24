@@ -26,7 +26,7 @@ namespace WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddScoped<ITVMazeProvider, TVMazeProvider>();
+            services.AddScoped<ITVMazeProvider, TVMazeProviderLocal>();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<ITvMazeScrapper, TvMazeScrapper>();
             services.AddDbContextPool<TVMazeScrapperContext>(options=>options.UseSqlite("Data Source=tvmazescrapper.db"), poolSize: 10);

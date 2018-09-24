@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Scrapper
 {
-    public class TVMazeProvider: ITVMazeProvider
+    //For testing purpose
+    public class TVMazeProviderLocal: ITVMazeProvider
     {
         public async Task<List<Show>> GetShows()
         {

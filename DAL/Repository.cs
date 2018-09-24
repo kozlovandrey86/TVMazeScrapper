@@ -35,13 +35,13 @@ namespace DAL
             return _context.Shows;
         }
 
-        public async Task<IEnumerable<Show>> GetShows(int page = 0)
+        public async Task<IEnumerable<Show>> GetShows(int page = 1)
         {
-            var pageSize = 1;
-            if (page < 0)
+            var pageSize = 10;
+            if (page < 1)
                 return GetAllShows();
             var shows = _context.Shows
-                               .Skip(pageSize * page)
+                               .Skip(pageSize * (page-1))
                                .Take(pageSize)
                                .Include(s => s.Casts);
             await shows.ForEachAsync(s => s.Casts = s.Casts.OrderByDescending(b => b.Birthday).ToList());

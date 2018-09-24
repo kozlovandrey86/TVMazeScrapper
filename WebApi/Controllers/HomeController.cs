@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         public string Index(){
             return "Home Page";
         }
-        // GET api/values
+
         [HttpGet("AllShows")]
         public string AllShows()
         {
